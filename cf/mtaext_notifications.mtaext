@@ -16,7 +16,7 @@ resources:
                 "state": "ENABLED",
                 "description": "Sends a simple email with the alert",
                 "properties": {
-                  "destination": "<your@email.com>",
+                  "destination": "stefan.roehrig@vaillant-group.com",
                   "useHtml": "true",
                   "subjectTemplate": "{subject}",
                   "payloadTemplate": "<!DOCTYPE html>\n<html>\n<body>\n<h1>BTP Resource Consumption notification</h1>\n<p>The following alerts have been generated:</p>\n<span style=\"font-family: 'Courier New', Courier, monospace; font-size: small;\">\n<pre>{body}</pre>\n</span>\n<p>Thank you</p>\n<p>Disclaimer: {ans-disclaimer}</p>\n</body>\n</html>"

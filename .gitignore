@@ -1,3 +1,6 @@
+# SRG
+tmp/
+
 # CAP ResourceConsumption
 _out
 *.db
