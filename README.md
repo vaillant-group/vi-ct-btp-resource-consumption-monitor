@@ -1,6 +1,6 @@
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-resource-consumption-monitor)](https://api.reuse.software/info/github.com/SAP-samples/btp-resource-consumption-monitor)
 
-# BTP Resource Consumption Monitor
+# BTP Resource Consumption Monitor 
 
 ## Description
 
