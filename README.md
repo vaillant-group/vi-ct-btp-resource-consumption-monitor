@@ -60,14 +60,37 @@ The following **Entitlements** need to be available to use this application:
 The following components are **optional but recommended** as an add-on:
 - SAP Analytics Cloud version 2024.08+ (**Note:** this SAC tenant can reside *anywhere*, it doesn't have to sit in the same global account)
 
-## Upgrading from version 2.0 to 2.1
+## Upgrading to newer versions
 
+### From version 2.0 to 2.1
 You can upgrade your 2.0.x version to 2.1.0 in Cloud Foundry. Upgrades do not apply to Kyma deployments as they are new from v2.1.0 onwards.
 To upgrade your existing installation, just follow the below installation steps again using your existing target.
 
 From 2.0.2 to 2.1.0, only the Backend and Fiori applications have been changed, the SAC package has not been changed.
 
-After the upgrade, make sure to assign the backend role again to the end users.
+After the upgrade, make sure to refresh the HTLM5 Repo and (if needed) assign the backend role again to the end users.
+
+### From version 2.1 to 2.2
+You can upgrade your 2.1.x version to 2.2.0 in Cloud Foundry and Kyma.
+To upgrade your existing installation, just follow the below installation steps again using your existing target.
+
+From 2.1.x to 2.2.0, all elements have been changed: CAP backend, Fiori applications and SAC content.
+
+After the upgrade, make sure to refresh the HTLM5 Repo and (if needed) assign the backend role again to the end users.
+
+**Important**: The upgrade to 2.2 triggers a migration, which, depending on the amount of already existing data points, will take some time. The application will do the migration during startup, but a timeout will make it crash and restart, after which it will continue the migration from where it stopped earlier. You will see the following logs during the migration and the aim will be to see all numbers go down to zero. It should be able to process about 10.000 records per startup. This is a one-time migration and subsequent restarts will be normal again.
+
+```
+[server] - xxx account structure items affected
+[server] - 0 custom tags needing update ...
+[server] - 0 custom tags updated
+[server] - 0 managed tags needing update ...
+[server] - 0 managed tags updated
+[server] - 0 commercial measures needing update ...
+[server] - 0 commercial measures updated
+[server] - 0 technical measures needing update ...
+[server] - 0 technical measures updated
+```
 
 ## Download and Installation
 
@@ -93,7 +116,7 @@ In **Business Application Studio**, make sure to have a `Development Space` of k
 cd cf
 npm install
 mbt build
-cf deploy ./mta_archives/btp-resource-consumption_2.1.0.mtar -e mtaext_notifications.mtaext
+cf deploy ./mta_archives/btp-resource-consumption_2.2.0.mtar -e mtaext_notifications.mtaext
 ```
 
 ***Note:*** This deployment will trigger an **initial activation email** to your email address asking for your consent to receive further emails. Make sure to action this email to ensure you receive the notifications from this application!
@@ -104,10 +127,12 @@ cf deploy ./mta_archives/btp-resource-consumption_2.1.0.mtar -e mtaext_notificat
 cd cf
 npm install
 mbt build
-cf deploy ./mta_archives/btp-resource-consumption_2.1.0.mtar
+cf deploy ./mta_archives/btp-resource-consumption_2.2.0.mtar
 ```
 
 #### For Kyma deployments:
+Make sure to have the **pre-requisites** for Kyma deployment installed. See here: [CAP docs: Deploy to Kyma](https://cap.cloud.sap/docs/guides/deployment/to-kyma#prerequisites), most notably the `helm`, `ctz` and `pack` clis. You can test this by running `echo "helm:" && helm version && echo "ctz:" && ctz -v && echo "pack:" && pack --version`.
+
 Set your Kyma namespace and generate a docker registry secret, e.g. `docker-registry`, and deploy it to Kyma:
 ```cmd
 kubectl config set-context --current --namespace=NAMESPACE
@@ -224,6 +249,7 @@ In the **Work Zone Site Manager**, open the `Channel Manager` and:
 1. Synchronize your HTML5 Repository by clicking on the `refresh icon`
 2. Click on `+ New`, `Content Package` and upload the generated `/workzone/package.zip` file, specifying `btprc-srv` as Runtime Destination. You can keep the other default values.
 3. The import will take up to 30 seconds to complete
+4. For the newly created channel, click on `Map aliases`, go to `Card Aliases`, select `btprc-srv` in both dropdowns and click on `+` to activate the entry. `Save` and close this screen. 
 
 #### Step 3. Configure your site
 In the **Work Zone Site Manager**, open the `Site Directory` and:
@@ -281,6 +307,15 @@ Open your browser to http://localhost:4004 where you will find the relevant `Web
 
 **Tip:** This will connect to the HANA Cloud database. In case you want to use a local sqlite database for testing, run `cds-ts deploy -2 sqlite`, and remove the binding to `btprc-db` from the `.cdsrc-private.json` file.
 
+## CAS Managed Service
+SAP Cloud Application Services (CAS) is offering a managed service which includes this FinOps application, together with IT Ops and Dev Ops, under the **Clean Code** umbrella. This is a perfect solution if you want SAP to manage this application for you.
+
+You can find more information:
+- on [SAP Trust Center: SAP CAS for Business AI](https://www.sap.com/about/trust-center/agreements/services/scope-documents.html?search=Business%20AI&sort=latest_desc&tag=language%3Aenglish&pdf-asset=9073c037-1b7f-0010-bca6-c68f7e60039b)
+- on the [SAP Cloud Application Services](https://www.sap.com/services-support/service-offerings/cloud-application-services.html) website
+
+Reach out to your CAS contact point or SAP account manager to get started.
+
 ## Architecture
 ![BTP Architecture](./btprc-architecture.png)
 
@@ -297,6 +332,9 @@ The other menu option (`Load consumption for current month`) is exactly the same
 You can freely edit/change the created jobs, or create other jobs. When the application (re)starts it will re-create the jobs if they don't exist already, but it won't overwrite them if they do exist.
 
 *Note:* Jobs have a default expected completion time of 15 seconds. Depending on the query, the application and/or API can take longer to process a request. In that case, the job monitor will classify the run as failed even though it ran successfully.
+
+## Daily Deltas
+The daily delta consumption in the FinOps application is only an approximation of the consumption over a 24hr period. It is not meant to be a hard data point referring to the actual consumption on the given day. It is calculated as the difference between the *last consumption retrieved on day x-1* and the *last consumption retrieved on day x*. As explained above, the FinOps tool retrieves the usage data multiple times throughout the day (by default every 3 hours). Doing so, it updates the data point for that day in its database with the newly received information. In case a given BTP Service reports on usage only the day after the consumption took place, it means that the newly received information relates to a previous day and not the current day. The FinOps tool can not differentiate between these, so for some services the *daily delta* might refer to the consumption of the previous day.
 
 ## Forecasting Configuration
 Each commercial metric of a service has a `Forecasting Configuration`. The following settings are available:
