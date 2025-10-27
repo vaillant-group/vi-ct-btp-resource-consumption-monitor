@@ -1,6 +1,6 @@
 _schema-version: "3.1"
 ID: btp-resource-consumption
-version: 2.2.0
+version: 2.2.1
 description: BTP usage and resource consumption dashboard
 parameters:
   enable-parallel-deployments: true
@@ -148,6 +148,10 @@ modules:
           target-path: resources/
           artifacts:
             - billingdifferences.zip
+        - name: usageanalytics
+          target-path: resources/
+          artifacts:
+            - usageanalytics.zip
 
   - name: btprcreport
     type: html5
@@ -229,6 +233,17 @@ modules:
   - name: billingdifferences
     type: html5
     path: app/billingdifferences
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms: []
+
+  - name: usageanalytics
+    type: html5
+    path: app/usageanalytics
     build-parameters:
       build-result: dist
       builder: custom

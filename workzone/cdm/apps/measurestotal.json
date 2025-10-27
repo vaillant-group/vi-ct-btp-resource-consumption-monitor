@@ -82,7 +82,7 @@
                 "urlTemplateParams": {
                     "appId": "measurestotal",
                     "query": {
-                        "subaccountId": "<YOUR_SUBACCOUNT_GUID>",
+                        "subaccountId": "bc38d705-056a-4329-b46c-8ff4a14749b5",
                         "saasApprouter": "true"
                     }
                 }

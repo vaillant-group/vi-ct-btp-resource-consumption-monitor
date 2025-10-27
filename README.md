@@ -2,6 +2,12 @@
 
 # BTP Resource Consumption Monitor 
 
+## Vaillant Release Notes
+
+* Version 2.2.1  
+  Integration of dummy Vaillant Usage Analytics  
+  New version 2.2.1 for app, mta and workzone package
+  
 ## Description
 
 Application to monitor and alert on commercial and technical consumption of BTP CPEA/BTPEA services.
@@ -219,7 +225,7 @@ Due to the export/import process of SAC, there might be misalignments between ou
 ### 3. Work Zone Content
 
 ***Important - First change the following code lines before continuing:***
-- Configure your **subaccount id** in business app configuration files of the multiple ui5 applications by searching for "<YOUR_SUBACCOUNT_GUID>" in each of the below files. Doing a search-and-replace should give you 8 matches:
+- Configure your **subaccount id** in business app configuration files of the multiple ui5 applications by searching for "<YOUR_SUBACCOUNT_GUID>" in each of the below files. Doing a search-and-replace should give you 9 matches:
     1. [Billing Differences app](./workzone/cdm/apps/billingdifferences.json#L85)
     2. [BTPRC Report app](./workzone/cdm/apps/btprcreport.json#L90)
     3. [Manage Alerts app](./workzone/cdm/apps/managealerts.json#L90)
@@ -228,6 +234,7 @@ Due to the export/import process of SAC, there might be misalignments between ou
     6. [Measures for Year by Tags app](./workzone/cdm/apps/measuresforyearbytags.json#L85)
     7. [Measures for Years app](./workzone/cdm/apps/measuresforyears.json#L85)
     8. [Measures Total app](./workzone/cdm/apps/measurestotal.json#L85)
+    9. [Usage Analytics app](./workzone/cdm/apps/usageanalytics.json#L85)
 - *(Only if you are activating the SAC content)* Configure your **SAC Story url** in SAC card configuration files of the multiple widgets by searching for "<YOUR_SAC_STORY_URL>" in each of the below files. Doing a search-and-replace should give you 4 matches. The resulting SAC URL **deviates slightly** from the URL shown in SAC, so be careful in composing it correctly. Your final URL (which is the same for all 4 files) should be: `https://<YOUR_HOST>.sapanalytics.cloud/sap/fpa/ui/tenants/<YOUR_TENANT>/app.html#/story2?shellMode=embed&/s2/<YOUR_STORY>/?url_api=true&pageBar=disable&view_id=story2`. Files to be changed:
     1. [SAC Measures by Tags](./workzone/cdm/cards/sac.measuresbytags/src/manifest.json#L33)
     2. [SAC Measures for Year by Tags](./workzone/cdm/cards/sac.measuresforyearbytags/src/manifest.json#L33)

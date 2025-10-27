@@ -59,6 +59,9 @@
         "id": "cards.app.billingdifferences.app"
       },
       {
+        "id": "cards.app.usageanalytics.app"
+      },
+      {
         "id": "cards.app.managealerts.app"
       },
       {
@@ -102,6 +105,9 @@
       },
       {
         "id": "saas_approuter_billingdifferences"
+      },
+      {
+        "id": "saas_approuter_usageanalytics"
       }
     ]
   }

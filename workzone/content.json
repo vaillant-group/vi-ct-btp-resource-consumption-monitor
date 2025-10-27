@@ -104,6 +104,13 @@
       "content": "app.measuresforyears.json"
     }
   },
+  "page-app.usageanalytics": {
+    "type": "workpage",
+    "src": {
+      "from": "cdm/pages",
+      "content": "app.usageanalytics.json"
+    }
+  },
   "page-app.billingdifferences": {
     "type": "workpage",
     "src": {
@@ -259,6 +266,15 @@
       "build": "npm i && npm run-script build"
     }
   },
+  "card-app.usageanalytics": {
+    "type": "card",
+    "src": {
+      "from": "cdm/cards/app.usageanalytics",
+      "package": "cards.app.usageanalytics.zip",
+      "manifest": "src/manifest.json",
+      "build": "npm i && npm run-script build"
+    }
+  },
   "card-info.optimization1": {
     "type": "card",
     "src": {
@@ -394,6 +410,13 @@
     "src": {
       "from": "cdm/apps",
       "content": "billingdifferences.json"
+    }
+  },
+  "app-usageanalytics": {
+    "type": "businessapp",
+    "src": {
+      "from": "cdm/apps",
+      "content": "usageanalytics.json"
     }
   }
 }

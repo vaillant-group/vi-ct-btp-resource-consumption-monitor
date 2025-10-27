@@ -1,7 +1,7 @@
 {
     "_version": "3.2.0",
     "identification": {
-        "id": "saas_approuter_measuresforyears",
+        "id": "saas_approuter_usageanalytics",
         "title": "Report showing BTP Credit Allocations",
         "entityType": "businessapp",
         "description": "",
@@ -18,14 +18,14 @@
                         }
                     },
                     "sap.app": {
-                        "id": "measuresforyears",
+                        "id": "usageanalytics",
                         "title": "Cost Allocation",
-                        "subTitle": "By Year"
+                        "subTitle": "By Year and Tag"
                     },
                     "sap.flp": {
                         "target": {
                             "type": "IBN",
-                            "inboundId": "measuresforyears-display"
+                            "inboundId": "usageanalytics-display"
                         }
                     }
                 }
@@ -57,11 +57,11 @@
             "sap.app": {
                 "crossNavigation": {
                     "inbounds": {
-                        "measuresforyears-display": {
-                            "semanticObject": "measuresforyears",
+                        "usageanalytics-display": {
+                            "semanticObject": "usageanalytics",
                             "action": "display",
                             "title": "Cost Allocation",
-                            "subTitle": "By Year",
+                            "subTitle": "By Year and Tag",
                             "icon": "sap-icon://tree",
                             "signature": {
                                 "parameters": {},
@@ -74,13 +74,13 @@
                 "destination": "saas_approuter"
             },
             "sap.ui5": {
-                "componentName": "measuresforyears"
+                "componentName": "usageanalytics"
             },
             "sap.integration": {
                 "navMode": "inplace",
                 "urlTemplateId": "urltemplate.fiori-cf-ars",
                 "urlTemplateParams": {
-                    "appId": "measuresforyears",
+                    "appId": "usageanalytics",
                     "query": {
                         "subaccountId": "bc38d705-056a-4329-b46c-8ff4a14749b5",
                         "saasApprouter": "true"
