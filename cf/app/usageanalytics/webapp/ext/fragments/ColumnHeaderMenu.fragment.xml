@@ -1,0 +1,57 @@
+<core:FragmentDefinition
+		xmlns="sap.m"
+		xmlns:core="sap.ui.core"
+		xmlns:f="sap.ui.layout.form"
+		xmlns:l="sap.ui.layout"
+		xmlns:tcm="sap.m.table.columnmenu"
+		xmlns:unified="sap.ui.unified"
+>
+	<tcm:Menu id="ColumnHeaderMenu" beforeOpen="onBeforeColumnHeaderMenuOpen">
+		<tcm:quickActions>
+			<tcm:QuickAction id="ColumnHeaderMenuFragmentQuickActionFilter" label="{i18n>filterBy}" >
+				<VBox id="vbox">
+					<List id="ColumnHeaderMenuList"
+						mode="MultiSelect"
+						items="{
+							path: '/propertyList'
+						}">
+						<items>
+							<StandardListItem id="_IDGenListItem1" title="{key}" />
+						</items>
+					</List>
+					<Button id="ColumnHeaderMenuListFilterButton" text="{i18n>filter}" press="handleColumnHeaderMenuListFilterButtonPressed" />
+				</VBox>
+			</tcm:QuickAction>
+			<tcm:QuickSort id="ColumnHeaderMenuFragmentQuickActionSort" change="handleColumnHeaderMenuFragmentQuickActionSortChanged">
+				<tcm:items>
+					<tcm:QuickSortItem id="ColumnHeaderMenuFragmentQuickActionSortItem" label="srlabelsort" ></tcm:QuickSortItem>
+				</tcm:items>
+			</tcm:QuickSort>
+			<tcm:QuickGroup id="ColumnHeaderMenuFragmentQuickActionGroup" change="handleColumnHeaderMenuFragmentQuickActionGroupChanged">
+				<tcm:items>
+					<tcm:QuickGroupItem id="ColumnHeaderMenuFragmentQuickActionGroupItem" label="srlabelgroup"></tcm:QuickGroupItem>
+				</tcm:items>
+			</tcm:QuickGroup>
+			<tcm:QuickTotal id="ColumnHeaderMenuFragmentQuickActionTotal" change="handleColumnHeaderMenuFragmentQuickActionTotalChanged">
+				<tcm:items>
+					<tcm:QuickTotalItem id="ColumnHeaderMenuFragmentQuickActionTotalItem" label="srlabeltotal"></tcm:QuickTotalItem>
+				</tcm:items>
+			</tcm:QuickTotal>
+		</tcm:quickActions>
+		<tcm:items>
+			<tcm:ActionItem id="ColumnHeaderMenuFragmentActionItemFilter" 
+				visible="false"
+				icon="sap-icon://filter"
+				label="{i18n>filter}"
+				press="handleFilterButtonPressed"
+				tooltip="{i18n>complex-filter}"
+			/>
+			<tcm:ActionItem id="ColumnHeaderMenuFragmentActionItemGroup" 
+				icon="sap-icon://group-2"
+				label="{i18n>group}"
+				press="handleSortButtonPressed"
+				tooltip="{i18n>complex-grouping-and-sorting}"
+			/>
+		</tcm:items>
+	</tcm:Menu>
+</core:FragmentDefinition>

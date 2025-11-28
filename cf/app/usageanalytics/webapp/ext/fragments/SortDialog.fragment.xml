@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog id="sortDialogFragmentViewSettingsDialog1" confirm="handleSortDialogConfirm">
+		<sortItems>
+			<ViewSettingsItem id="sortDialogFragmentViewSettingsItem1" text="{i18n>columnDirectory}, {i18n>columnSubaccount}, {i18n>columnDate}, {i18n>columnService}" key="DirSubDateServ" selected="false" />
+			<ViewSettingsItem id="sortDialogFragmentViewSettingsItem2" text="{i18n>columnSubaccount}, {i18n>columnDirectory}, {i18n>columnDate}, {i18n>columnService}" key="SubDirDateServ" selected="false" />
+			<ViewSettingsItem id="sortDialogFragmentViewSettingsItem3" text="{i18n>columnDate}, {i18n>columnDirectory}, {i18n>columnSubaccount}, {i18n>columnService}" key="DateDirSubServ" selected="false" />
+			<ViewSettingsItem id="sortDialogFragmentViewSettingsItem4" text="{i18n>columnService}, {i18n>columnDirectory}, {i18n>columnSubaccount}, {i18n>columnDate}" key="ServDirSubDate" selected="false" />
+			<ViewSettingsItem id="sortDialogFragmentViewSettingsItem5" text="{i18n>noSorting}" key="NoSorting" selected="true" />
+			<!--  -->
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

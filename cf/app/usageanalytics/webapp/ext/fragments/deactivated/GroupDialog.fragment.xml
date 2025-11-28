@@ -1,0 +1,13 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog id="groupDialogFragmentViewSettingsDialog1"
+		confirm=".handleGroupDialogConfirm"
+		reset=".resetGroupDialog">
+		<groupItems>
+			<ViewSettingsItem id="groupDialogFragmentViewSettingsItem1" text="Subaccount" key="SubaccountName" selected="true" />
+			<ViewSettingsItem id="groupDialogFragmentViewSettingsItem2" text="Date" key="ReportYearMonth" />
+			<ViewSettingsItem id="groupDialogFragmentViewSettingsItem3" text="Service" key="ServiceName" />
+		</groupItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>
